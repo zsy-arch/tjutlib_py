@@ -1,0 +1,336 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>图书馆预约</title>
+    <style type="text/css">
+        * {
+            margin: 0;
+            padding: 0;
+            /*background-color: lightgray;*/
+        }
+
+        .lib-header {
+            line-height: 30px;
+            height: 30px;
+            background-color: white;
+            padding-top: 10px;
+        }
+
+        .lib-header-text {
+            background-color: white;
+            text-align: center;
+            font-size: 20px;
+            font-family: "Microsoft YaHei UI", serif;
+            padding-bottom: 10px;
+        }
+
+        .lib-main {
+            /*display: none;*/
+            width: 100%;
+            height: 600px;
+            background-color: white;
+        }
+
+        .lib-main-item {
+            padding: 3px;
+            display: inline-block;
+            width: 100%;
+            height: auto;
+            border-top: 1px lightgray solid;
+            border-bottom: 1px lightgray solid;
+            background-color: white;
+        }
+
+        .lib-student {
+            padding: 10px;
+            display: inline-block;
+            font-size: 17px;
+        }
+
+        .lib-student-symbol {
+            padding: 0;
+            margin: 0;
+            display: inline-block;
+            color: white;
+            background-color: #51c7c9;
+            font-size: 15px;
+            width: 60px;
+            height: 20px;
+            text-align: center;
+            border-radius: 8px;
+        }
+
+        .lib-student-symbol2 {
+            padding: 0;
+            margin: 0;
+            display: inline-block;
+            color: white;
+            background-color: #f26665;
+            font-size: 15px;
+            width: 60px;
+            height: 20px;
+            text-align: center;
+            border-radius: 8px;
+        }
+
+        .lib-student-date {
+            display: inline-block;
+            /*position: absolute;*/
+            width: auto;
+            float: left;
+            font-family: '黑体', sans-serif;
+            font-size: 18px;
+            padding-left: 10px;
+            padding-bottom: 10px;
+            color: gray;
+        }
+
+        .lib-student-type {
+            display: inline-block;
+            width: auto;
+            float: right;
+            padding-right: 15px;
+            font-size: 18px;
+            color: gray;
+        }
+
+        .lib-main2 {
+            /*display: none;*/
+            position: absolute;
+            width: 100%;
+            height: auto;
+            top: 0;
+            left: 0;
+            background-color: white;
+        }
+
+        .lib-main2-ldiv {
+            padding: 10px;
+            font-size: 15px;
+            line-height: 20px;
+            position: relative;
+            float: left;
+            color: gray;
+        }
+
+        .lib-main2-rdiv {
+            padding: 10px;
+            position: relative;
+            left: 1em;
+        }
+
+        .lib-main2-btn {
+            margin-top: 1em;
+            padding-top: 1em;
+            position: absolute;
+            width: 100%;
+            bottom: -3em;
+        }
+
+        .cancel {
+            font-size: 1.2em;
+            height: 2.2em;
+            border: none;
+            outline: none;
+            width: 100%;
+            background-color: #51c7c9;
+            color: white;
+        }
+
+        .unvisible {
+            display: none;
+        }
+    </style>
+
+</head>
+<body>
+<div class="lib-header" id="header">
+    <p class="lib-header-text">您本月已有&nbsp;0&nbsp;次违约行为</p>
+</div>
+<div class="lib-main" id="main">
+    <div class="lib-main-item" onclick="showMain2()">
+        <p class="lib-student">$NUMBER$-$NAME$</p>
+        <div class="lib-student-symbol">
+            已通过
+        </div>
+        <br>
+        <p class="lib-student-date" id="top-date">
+            <!--            2020-12-13 9点&nbsp;至12点-->
+        </p>
+        <p class="lib-student-type">
+            图书借还
+        </p>
+    </div>
+    <div class="lib-main-item" onclick="showMain3()">
+        <p class="lib-student">$NUMBER$-$NAME$</p>
+        <div class="lib-student-symbol">
+            已通过
+        </div>
+        <br>
+        <p class="lib-student-date" id="top-date2">
+            <!--            2020-12-13 9点&nbsp;至12点-->
+        </p>
+        <p class="lib-student-type">
+            图书借还
+        </p>
+    </div>
+    <div class="lib-main-item">
+        <p class="lib-student">$NUMBER$-$NAME$</p>
+        <div class="lib-student-symbol">
+            已通过
+        </div>
+        <p class="lib-student-date">
+            2020-12-12 19点&nbsp;至21点
+        </p>
+        <p class="lib-student-type">
+            图书借还
+        </p>
+    </div>
+    <div class="lib-main-item">
+        <p class="lib-student">$NUMBER$-$NAME$</p>
+        <div class="lib-student-symbol">
+            已通过
+        </div>
+        <p class="lib-student-date">
+            2020-12-11 9点&nbsp;至12点
+        </p>
+        <p class="lib-student-type">
+            图书借还
+        </p>
+    </div>
+    <div class="lib-main-item">
+        <p class="lib-student">$NUMBER$-$NAME$</p>
+        <div class="lib-student-symbol2">
+            已取消
+        </div>
+        <p class="lib-student-date">
+            2020-12-11 9点&nbsp;至12点
+        </p>
+        <p class="lib-student-type">
+            图书借还
+        </p>
+    </div>
+</div>
+<div class="lib-main2 unvisible" id="main2-1">
+    <div class="lib-main2-ldiv">
+        <span class="lib-main2-l">账号</span>
+        <br>
+        <span class="lib-main2-l">姓名</span>
+        <br>
+        <span class="lib-main2-l">预约类型</span>
+        <br>
+        <span class="lib-main2-l">预约时段</span>
+        <br>
+        <span class="lib-main2-l">预约入馆时间</span>
+        <br>
+        <span class="lib-main2-l">预约出馆时间</span>
+        <br>
+    </div>
+    <div class="lib-main2-rdiv">
+        <span class="lib-main2-r">$NUMBER$</span>
+        <br>
+        <span class="lib-main2-r">$NAME$</span>
+        <br>
+        <span class="lib-main2-r">图书借还</span>
+        <br>
+        <span class="lib-main2-r">今天</span>
+        <br>
+        <span class="lib-main2-r">9点</span>
+        <br>
+        <span class="lib-main2-r">12点</span>
+        <br>
+    </div>
+    <br>
+    <div class="lib-main2-btn">
+        <button class="cancel" onclick="showMain1(1)">
+            取消预约
+        </button>
+    </div>
+</div>
+<div class="lib-main2 unvisible" id="main2-2">
+    <div class="lib-main2-ldiv">
+        <span class="lib-main2-l">账号</span>
+        <br>
+        <span class="lib-main2-l">姓名</span>
+        <br>
+        <span class="lib-main2-l">预约类型</span>
+        <br>
+        <span class="lib-main2-l">预约时段</span>
+        <br>
+        <span class="lib-main2-l">预约入馆时间</span>
+        <br>
+        <span class="lib-main2-l">预约出馆时间</span>
+        <br>
+    </div>
+    <div class="lib-main2-rdiv">
+        <span class="lib-main2-r">$NUMBER$</span>
+        <br>
+        <span class="lib-main2-r">$NAME$</span>
+        <br>
+        <span class="lib-main2-r">图书借还</span>
+        <br>
+        <span class="lib-main2-r">今天</span>
+        <br>
+        <span class="lib-main2-r">19点</span>
+        <br>
+        <span class="lib-main2-r">21点</span>
+        <br>
+    </div>
+    <br>
+    <div class="lib-main2-btn">
+        <button class="cancel" onclick="showMain1(2)">
+            取消预约
+        </button>
+    </div>
+</div>
+<script type="application/javascript">
+    let d = new Date();
+    let dateInfo = d.getFullYear() + "-" + (d.getMonth() + 1) + "-" + d.getDate() + " 9点 至 12点";
+    tp = document.getElementById("top-date");
+    txt = document.createTextNode(dateInfo);
+    tp.appendChild(txt);
+
+    tp2 = document.getElementById("top-date2");
+    dateInfo = d.getFullYear() + "-" + (d.getMonth() + 1) + "-" + d.getDate() + " 19点 至 21点";
+    txt2 = document.createTextNode(dateInfo);
+    tp2.appendChild(txt2);
+
+    function hide(whatToShow) {
+        document.getElementById("header").style.display = 'none';
+        document.getElementById("main").style.display = 'none';
+        if (whatToShow === 1) {
+            document.getElementById("main2-1").style.display = 'block'
+        } else {
+            document.getElementById("main2-2").style.display = 'block'
+        }
+    }
+
+    function show() {
+        document.getElementById("header").style.display = 'block';
+        document.getElementById("main").style.display = 'block';
+    }
+
+    function showMain2() {
+        hide(1);
+    }
+
+    function showMain3() {
+        hide(2);
+    }
+
+    function showMain1(wth) {
+        if (wth === 1) {
+            show();
+            document.getElementById("main2-1").style.display = 'none';
+        } else {
+            show();
+            document.getElementById("main2-2").style.display = 'none';
+        }
+    }
+</script>
+</body>
+</html>
